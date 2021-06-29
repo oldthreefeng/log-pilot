@@ -724,6 +724,10 @@ func (p *Pilot) getLogConfigs(jsonLogPath string, mounts []types.MountPoint, lab
 			}
 
 			logLabel := strings.TrimPrefix(k, serviceLogs)
+			log.Debug("logLabel: ", logLabel)
+			if strings.Contains(logLabel, "arms") {
+				continue
+			}
 			if err := root.insert(strings.Split(logLabel, "."), labels[k]); err != nil {
 				return nil, err
 			}
